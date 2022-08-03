@@ -1,0 +1,33 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-6">
+            <lightning-card class="slds-m-around_small"  title="Sign Me Up !" icon-name="standard:swarm_session">
+                <div class="slds-p-around_large">
+                    <lightning-input type="text" label="Name Your Subscription" onchange={handleInputChange}></lightning-input>
+                    <!--<lightning-input type="date" label="Start Date" onchange={} readonly></lightning-input> -->
+                    <!-- DATE FIELDS REFLECTING THEIR SELECTIONS -->
+                    <!--<lightning-input type="date" label="End Date" onchange={} readonly></lightning-input> --> 
+                </div>
+                <div slot="footer">
+                    <lightning-button label="Subscribe" onclick={handleSubscribe} ></lightning-button>
+                </div>
+            </lightning-card>
+            <c-sub-date-picker></c-sub-date-picker>
+        </div>
+        <!-- See all my System Subscriptions -->
+        <div class="slds-col slds-size_6-of-6">
+            <lightning-card class="slds-m-around_small"  title="My Subsciptions" icon-name="standard:swarm_session">
+                <div slot="footer">
+                    <div class="slds-m-around_medium">
+                        <lightning-datatable
+                            key-field="key"
+                            data={mySubscriptionData}
+                            columns={columns}
+                            onrowaction={handleRowAction}>
+                        </lightning-datatable>
+                    </div> 
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>

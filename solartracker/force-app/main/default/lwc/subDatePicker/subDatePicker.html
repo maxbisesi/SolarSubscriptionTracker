@@ -1,0 +1,45 @@
+<template>
+    <!--Set Filters -->
+    <lightning-card title="Search Subscriptions"> 
+        <div class="slds-box">
+            <!-- Choose System -->
+
+            <lightning-combobox
+                name="systems"
+                label="Solar System"
+                value={systemId}
+                options={options}
+                onchange={handleComboChange}></lightning-combobox>
+                <lightning-button-icon onclick={removeSystemFilter} icon-name="utility:close"  alternative-text="kill filter"></lightning-button-icon>
+            <lightning-combobox
+                name="month"
+                label="Month"
+                value={filterMonth}
+                options={months}
+                onchange={handleMonthChange}></lightning-combobox>
+                <lightning-button-icon onclick={removeMonthFilter} icon-name="utility:close"  alternative-text="kill filter"></lightning-button-icon>
+            <lightning-combobox
+                name="year"
+                label="Year"
+                value={filterYear}
+                options={years}
+                onchange={handleYearChange}></lightning-combobox>
+                <lightning-button-icon onclick={removeYearFilter} icon-name="utility:close"  alternative-text="kill filter"></lightning-button-icon>
+        </div>
+        <!-- See available slots for given System and year -->
+        <!-- 'Id': dt.Id, 'name': dt.Solar_System__r.Name, 'start': dt.Effective_Start_Date__c 'end':dt.Effective_End_Date__c -->
+        <div class="slds-box">
+            <ul class="slds-has-dividers_around-space slds-m-horizontal_large slds-m-top_small">
+                <template for:each={dateList} for:item="item">
+                    <li key={item.Id} class="subscription slds-m-vertical_small available" data-subid={item.Id}>
+                        <span class="systemname">{item.Solar_System__r.Name}</span>
+                        <p style="margin-left:15px">{item.Effective_Start_Date__c} -- {item.Effective_End_Date__c}</p>
+                    </li>
+                </template>
+            </ul>
+        </div>
+        <div slot="footer">
+            <lightning-button type="button" label="Clear" onclick={handleClear}></lightning-button>
+        </div>
+    </lightning-card>
+</template>
